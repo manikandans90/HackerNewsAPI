@@ -15,6 +15,28 @@ namespace HackerNewsAPI.Controllers
             _logger = logger;
 
         }
+
+
+        [HttpGet("GetAllStories")]
+        public async Task<IActionResult> GetAllStories()
+        {
+            try
+            {
+                var result = await _IAPIHander.GetAllStory();
+                if (result != null)
+                {
+                    return Ok(result);
+                }
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to execute the API");
+                return BadRequest(ex);
+            }
+        }
+
+
         [HttpGet(Name = "GetStories")]
         public async Task<IActionResult> GetStories(string? id)
         {
@@ -36,23 +58,6 @@ namespace HackerNewsAPI.Controllers
         }
 
 
-        [HttpGet("GetAllStories")]
-        public async Task<IActionResult> GetAllStories()
-        {
-            try
-            {
-                var result = await _IAPIHander.GetAllStory();
-                if (result != null)
-                {
-                    return Ok(result);
-                }
-                return NoContent();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Failed to execute the API");
-                return BadRequest(ex);
-            }
-        }
+
     }
 }
