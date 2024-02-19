@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.Text.Json.Serialization;
 
 namespace HackerNewsAPI.Models
 {

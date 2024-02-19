@@ -1,17 +1,14 @@
-﻿using HackerNewsAPI.Controllers;
-using HackerNewsAPI.Interfaces;
+﻿using HackerNewsAPI.Interfaces;
 using HackerNewsAPI.Models;
-using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 
 namespace HackerNewsAPI
 {
     public class APIHandler : IAPIHander
     {
         private readonly HttpClient _httpClient;
-        private readonly string serviceUrl;
-        private readonly string allStory;
+        private readonly string? serviceUrl;
+        private readonly string? allStory;
         private readonly IConfiguration _configuration;
         private readonly ILogger<APIHandler> _logger;
         public APIHandler(IConfiguration configuration, ILogger<APIHandler> logger)
@@ -24,7 +21,7 @@ namespace HackerNewsAPI
         }
 
 
-        public async Task<IEnumerable<Story>>? GetStoryById(string? id)
+        public async Task<IEnumerable<Story>> GetStoryById(string? id)
         {
 
             string apiUrl = string.Format(serviceUrl, id);
@@ -40,9 +37,9 @@ namespace HackerNewsAPI
                     if (!string.IsNullOrWhiteSpace(convertedValue))
                     {
                         Story? story = JsonConvert.DeserializeObject<Story>(convertedValue);
-                        List<Story>? storiesList = new List<Story>();
 
                         // Adding a Story object to the list
+                        List<Story>? storiesList = new List<Story>();
                         storiesList?.Add(story);
                         IEnumerable<Story>? storiesEnumerable = storiesList;
                         return storiesEnumerable;
@@ -61,7 +58,7 @@ namespace HackerNewsAPI
             }
         }
 
-        public async Task<List<string>>? GetAllStory()
+        public async Task<List<string>> GetAllStory()
         {
 
             try
@@ -82,7 +79,6 @@ namespace HackerNewsAPI
                 }
 
                 return null;
-
 
             }
             catch (Exception ex)
