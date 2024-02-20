@@ -15,6 +15,9 @@ To run this project, you will need to add the following environment variables to
 
 `GetStories`
     https://hacker-news.firebaseio.com/v0/beststories.json
+    
+`SeriLog.Path`
+    Please configure the path to save the log output 
 
 ## License
 
